@@ -1,0 +1,61 @@
+From c60c4505fc1bdd87d981a3668baab8b70a5af854 Mon Sep 17 00:00:00 2001
+From: pch666777 <1005100717@qq.com>
+Date: Mon, 16 Jun 2025 08:44:51 +0800
+Subject: [PATCH] fix find minizip include dir
+
+---
+ externals/coda-oss/modules/drivers/zlib/CMakeLists.txt | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/externals/coda-oss/modules/drivers/zlib/CMakeLists.txt b/externals/coda-oss/modules/drivers/zlib/CMakeLists.txt
+index 77ec31fa..8998c0ac 100644
+--- a/externals/coda-oss/modules/drivers/zlib/CMakeLists.txt
++++ b/externals/coda-oss/modules/drivers/zlib/CMakeLists.txt
+@@ -25,7 +25,7 @@ if (ZIP_HOME)
+     endif()
+ 
+     # verify we can link zlib
+-    set(CMAKE_REQUIRED_INCLUDES "${ZIP_HOME}/include")
++    set(CMAKE_REQUIRED_INCLUDES "/usr/include/minizip")
+     set(CMAKE_REQUIRED_LIBRARIES ${${TARGET_NAME}_PATH})
+     unset(ZLIB_HOME_VALID CACHE)
+     check_cxx_source_compiles("
+@@ -40,7 +40,7 @@ if (ZIP_HOME)
+ 
+     # create interface library pointing to the external zlib
+     add_library(${TARGET_NAME} INTERFACE)
+-    target_include_directories(${TARGET_NAME} INTERFACE "${ZIP_HOME}/include")
++    target_include_directories(${TARGET_NAME} INTERFACE "/usr/include/minizip")
+     target_link_libraries(${TARGET_NAME} INTERFACE ${${TARGET_NAME}_PATH})
+ 
+ 
+@@ -56,7 +56,7 @@ if (ZIP_HOME)
+     endif()
+ 
+     # verify we can link minizip
+-    set(CMAKE_REQUIRED_INCLUDES "${ZIP_HOME}/include")
++    set(CMAKE_REQUIRED_INCLUDES "/usr/include/minizip")
+     set(CMAKE_REQUIRED_LIBRARIES ${minizip_PATH} ${z_PATH})
+     unset(MINIZIP_HOME_VALID CACHE)
+     check_cxx_source_compiles("
+@@ -71,7 +71,7 @@ if (ZIP_HOME)
+ 
+     # create interface library pointing to the external minizip
+     add_library(minizip INTERFACE)
+-    target_include_directories(minizip INTERFACE "${ZIP_HOME}/include")
++    target_include_directories(minizip INTERFACE "/usr/include/minizip")
+     target_link_libraries(minizip INTERFACE ${minizip_PATH})
+ elseif(ENABLE_ZIP)
+     message("ZIP_HOME not specified, so zlib and minizip will be built")
+@@ -112,7 +112,7 @@ elseif(ENABLE_ZIP)
+ endif()
+ 
+ # disable include of crypt.h in minizip to fix name clash issue with glibc
+-target_compile_definitions(minizip PUBLIC -DNOCRYPT -DNOUNCRYPT)
++# target_compile_definitions(minizip PUBLIC -DNOCRYPT -DNOUNCRYPT)
+ 
+ install(TARGETS z minizip
+         EXPORT ${CODA_EXPORT_SET_NAME}
+-- 
+2.49.0.windows.1
+

@@ -1,0 +1,12 @@
+PKGNAME=lata
+PKGSEC=utils
+PKGDES="Loongson Architecture Translator for aarch64 applications"
+PKGDEP="glib glibc zlib libdrm lsb-release capstone elfutils"
+# PKGRECOM="emukit wine"
+BUILDDEP="python-3 ninja openssl pkg-config"
+
+# ABSPIRAL=0
+# PKGPROV="lat_spiral"
+# ABMANCOMPRESS=0
+
+FAIL_ARCH="!(loongarch64)"

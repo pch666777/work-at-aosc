@@ -1,0 +1,14 @@
+PKGNAME=nitro
+PKGSEC=libs
+PKGPROV=libnitf
+PKGDES="C/C++ library for National Imagery Transmission Format (NITF)"
+PKGDEP="xerces-c libjpeg-turbo pcre2 zlib minizip"
+CMAKE_AFTER=(
+    '-DBUILD_PYTHON_MODULES=OFF'
+    '-DXML_HOME=/lib'
+    '-DJPEG_HOME=/lib'
+    '-DPCRE_HOME=/lib'
+    '-DZIP_HOME=/lib'
+    #-DNITRO_PKG_SUBDIR=share/pkgconfig
+)
+ABTYPE=cmake

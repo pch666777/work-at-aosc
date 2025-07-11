@@ -1,0 +1,4 @@
+VER=0+git20250612
+SRCS="git::commit=031030a6d88f22ee74a03e593c9bea75ab1f532b::https://github.com/lata-opensource/lata"
+CHKSUMS="SKIP"
+# CHKUPDATE="anitya::id=227282"

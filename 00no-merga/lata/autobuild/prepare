@@ -1,0 +1,2 @@
+abinfo "Make build dir..."
+mkdir -p "${SRCDIR}/build_aarch64"

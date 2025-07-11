@@ -1,0 +1,5 @@
+UPSTREAM_VER=A72
+VER=${UPSTREAM_VER:1}
+SRCS="git::commit=tags/${UPSTREAM_VER}::https://github.com/LongSoft/UEFITool"
+CHKSUMS="SKIP"
+CHKUPDATE="anitya::id=227282"

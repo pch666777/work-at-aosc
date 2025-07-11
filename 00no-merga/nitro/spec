@@ -1,0 +1,4 @@
+VER=2.11.7
+SRCS="git::commit=tags/NITRO-${VER}::https://github.com/mdaus/nitro"
+CHKSUMS="SKIP"
+CHKUPDATE="anitya::id=312798"

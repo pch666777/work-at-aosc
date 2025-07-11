@@ -1,0 +1,41 @@
+abinfo "Prepare compile flags..."
+unset CXXFLAGS
+unset CFLAGS
+unset LDFLAGS
+export CFLAGS="-Wno-error=unused-but-set-variable -Wno-error=unused-function -Wformat -Werror=format-y2k"
+local _configure64_flags=(
+	--target-list=aarch64-linux-user
+	#--disable-debug-info
+	--enable-debug
+	--disable-docs
+	--disable-werror
+	--enable-capstone
+	--enable-lata
+	--insts-pattern-opt
+	--indirect-jmp-opt
+	--split-tb-opt
+	--lata-tu-opt
+)
+
+abinfo "Configure lata..."
+pushd "${SRCDIR}/build_aarch64" >/dev/null
+../configure "${_configure64_flags[@]}"
+
+abinfo "Ninja make..."
+ninja -j$(nproc)
+popd >/dev/null
+
+abinfo "Install lata..."
+mkdir -p "${SRCDIR}/abdist/usr/bin"
+mkdir -p "${SRCDIR}/abdist/usr/lib/binfmt.d"
+mkdir -p "${SRCDIR}/abdist/usr/lib/sysctl.d"
+install -Dm755 "${SRCDIR}/build_aarch64/lata-aarch64" "${SRCDIR}/abdist/usr/bin/lata-aarch64"
+cd "${SRCDIR}/abdist/usr/bin"
+ln -s "./lata-aarch64" "./lata"
+cd "${SRCDIR}"
+
+echo "vm.mmap_min_addr = 65536" >"${SRCDIR}/abdist/usr/lib/sysctl.d/mmap_min_addr.conf"
+
+# debug use it
+# install -Dm755 "${SRCDIR}/build_aarch64/lata-aarch64" "/debs/lata"
+# fi
