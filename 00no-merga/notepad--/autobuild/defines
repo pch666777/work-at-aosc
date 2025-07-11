@@ -1,0 +1,8 @@
+PKGNAME=notepad--
+PKGSEC=editors
+PKGDES="Cross platform, lightweight text editor"
+PKGDEP="gcc-runtime glibc qt-5"
+
+ABTYPE=cmakeninja
+# CMAKE_AFTER=(
+# )

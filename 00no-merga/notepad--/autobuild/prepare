@@ -1,0 +1,3 @@
+abinfo "Copy cmake files ..."
+cp "./how_build/CMakeLists.txt" "./CMakeLists.txt"
+cp -r "./how_build/cmake" "./cmake"

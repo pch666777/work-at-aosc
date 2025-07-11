@@ -1,0 +1,24 @@
+From 4bd05db849e1c34ba1b32f6f960d79ced7b3211f Mon Sep 17 00:00:00 2001
+From: pch666777 <1005100717@qq.com>
+Date: Fri, 11 Jul 2025 22:52:06 +0800
+Subject: [PATCH] fix unknow type intptr_t
+
+---
+ src/qscint/src/xmlMatchedTagsHighlighter.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/qscint/src/xmlMatchedTagsHighlighter.h b/src/qscint/src/xmlMatchedTagsHighlighter.h
+index fec5211..17f3d4a 100755
+--- a/src/qscint/src/xmlMatchedTagsHighlighter.h
++++ b/src/qscint/src/xmlMatchedTagsHighlighter.h
+@@ -20,6 +20,7 @@
+ //#include <windows.h>
+ #include <string>
+ #include <vector>
++#include <cstdint>
+ 
+ class QsciScintilla;
+ 
+-- 
+2.50.1
+
