@@ -58,6 +58,17 @@ link_my_asoc(){
     relink_dir "loong64" "my-TREE"
 }
 
+create_dir(){
+    mkdir "./base"
+    mkdir "./base/SRCS"
+    mkdir "./amd64"
+    mkdir "./arm64"
+    mkdir "./loong3"
+    mkdir "./loong64"
+    mkdir "./ppc"
+    mkdir "./rv"
+}
+
 
 BASE_DIR=$(pwd)
 echo "当前工作目录：$BASE_DIR"
@@ -65,11 +76,15 @@ echo "当前工作目录：$BASE_DIR"
 echo "1-连接 aosc 目录"
 echo "2-连接 my-aosc 目录"
 echo "3-清理所有构架"
+echo "4-创建所有构架目录"
 
-read -p "请输入操作数字 (1-3): " choice
+read -p "请输入操作数字 (1-4): " choice
 case $choice in
     1) link_asoc ;;
     2) link_my_asoc ;;
     3) clear_dir ;;
+    4) create_dir ;;
     *) echo "无效输入" ;;
 esac
+
+echo "执行完成"
