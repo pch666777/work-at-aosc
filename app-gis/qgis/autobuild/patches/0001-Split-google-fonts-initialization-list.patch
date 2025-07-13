@@ -1,14 +1,14 @@
-From 54e970838bbba13aeeb6a04ec3462cb4667fd6a6 Mon Sep 17 00:00:00 2001
+From 56d96f15907b6bf050a10d39c66c324f9e5dd812 Mon Sep 17 00:00:00 2001
 From: pch666777 <1005100717@qq.com>
 Date: Sun, 13 Jul 2025 19:05:14 +0800
 Subject: [PATCH] Split google fonts initialization list
 
 ---
- src/core/textrenderer/qgsfontmanager.cpp | 52 ++++++++++++++++++------
- 1 file changed, 39 insertions(+), 13 deletions(-)
+ src/core/textrenderer/qgsfontmanager.cpp | 50 ++++++++++++++++++------
+ 1 file changed, 38 insertions(+), 12 deletions(-)
 
 diff --git a/src/core/textrenderer/qgsfontmanager.cpp b/src/core/textrenderer/qgsfontmanager.cpp
-index 9d59560dec..5a6a9383b9 100644
+index 9d59560dec..a7bbaba5b8 100644
 --- a/src/core/textrenderer/qgsfontmanager.cpp
 +++ b/src/core/textrenderer/qgsfontmanager.cpp
 @@ -243,11 +243,9 @@ QgsFontDownloadDetails GoogleFontDetails( const QString &family, const QStringLi
@@ -30,7 +30,7 @@ index 9d59560dec..5a6a9383b9 100644
      GoogleFontDetails( QStringLiteral( "Erica One" ), { QStringLiteral( "ofl/ericaone/EricaOne-Regular.ttf" ) }, QStringLiteral( "ofl/ericaone/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Esteban" ), { QStringLiteral( "ofl/esteban/Esteban-Regular.ttf" ) }, QStringLiteral( "ofl/esteban/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Estonia" ), { QStringLiteral( "ofl/estonia/Estonia-Regular.ttf" ) }, QStringLiteral( "ofl/estonia/OFL.txt" ) ),
-+  }
++  };
 +}
 +
 +void GoogleFonts_init1(std::vector<QgsFontDownloadDetails> &sGoogleFonts){
@@ -43,7 +43,7 @@ index 9d59560dec..5a6a9383b9 100644
      GoogleFontDetails( QStringLiteral( "Mochiy Pop P One" ), { QStringLiteral( "ofl/mochiypoppone/MochiyPopPOne-Regular.ttf" ) }, QStringLiteral( "ofl/mochiypoppone/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Modak" ), { QStringLiteral( "ofl/modak/Modak-Regular.ttf" ) }, QStringLiteral( "ofl/modak/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Modern Antiqua" ), { QStringLiteral( "ofl/modernantiqua/ModernAntiqua-Regular.ttf" ) }, QStringLiteral( "ofl/modernantiqua/OFL.txt" ) ),
-+  }
++  };
 +}
 +
 +void GoogleFonts_init2(std::vector<QgsFontDownloadDetails> &sGoogleFonts){
@@ -56,7 +56,7 @@ index 9d59560dec..5a6a9383b9 100644
      GoogleFontDetails( QStringLiteral( "Palanquin" ), { QStringLiteral( "ofl/palanquin/Palanquin-Thin.ttf" ), QStringLiteral( "ofl/palanquin/Palanquin-ExtraLight.ttf" ), QStringLiteral( "ofl/palanquin/Palanquin-Light.ttf" ), QStringLiteral( "ofl/palanquin/Palanquin-Regular.ttf" ), QStringLiteral( "ofl/palanquin/Palanquin-Medium.ttf" ), QStringLiteral( "ofl/palanquin/Palanquin-SemiBold.ttf" ), QStringLiteral( "ofl/palanquin/Palanquin-Bold.ttf" ) }, QStringLiteral( "ofl/palanquin/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Palanquin Dark" ), { QStringLiteral( "ofl/palanquindark/PalanquinDark-Regular.ttf" ), QStringLiteral( "ofl/palanquindark/PalanquinDark-Medium.ttf" ), QStringLiteral( "ofl/palanquindark/PalanquinDark-SemiBold.ttf" ), QStringLiteral( "ofl/palanquindark/PalanquinDark-Bold.ttf" ) }, QStringLiteral( "ofl/palanquindark/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Palette Mosaic" ), { QStringLiteral( "ofl/palettemosaic/PaletteMosaic-Regular.ttf" ) }, QStringLiteral( "ofl/palettemosaic/OFL.txt" ) ),
-+  }
++  };
 +}
 +
 +void GoogleFonts_init3(std::vector<QgsFontDownloadDetails> &sGoogleFonts){
@@ -65,12 +65,10 @@ index 9d59560dec..5a6a9383b9 100644
      GoogleFontDetails( QStringLiteral( "Pangolin" ), { QStringLiteral( "ofl/pangolin/Pangolin-Regular.ttf" ) }, QStringLiteral( "ofl/pangolin/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Paprika" ), { QStringLiteral( "ofl/paprika/Paprika-Regular.ttf" ) }, QStringLiteral( "ofl/paprika/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Parisienne" ), { QStringLiteral( "ofl/parisienne/Parisienne-Regular.ttf" ) }, QStringLiteral( "ofl/parisienne/OFL.txt" ) ),
-@@ -1796,20 +1812,30 @@ QgsFontDownloadDetails QgsFontManager::detailsForFontDownload( const QString &fa
-     GoogleFontDetails( QStringLiteral( "Zhi Mang Xing" ), { QStringLiteral( "ofl/zhimangxing/ZhiMangXing-Regular.ttf" ) }, QStringLiteral( "ofl/zhimangxing/OFL.txt" ) ),
+@@ -1797,19 +1813,29 @@ QgsFontDownloadDetails QgsFontManager::detailsForFontDownload( const QString &fa
      GoogleFontDetails( QStringLiteral( "Zilla Slab" ), { QStringLiteral( "ofl/zillaslab/ZillaSlab-Light.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-LightItalic.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-Regular.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-Italic.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-Medium.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-MediumItalic.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-SemiBold.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-SemiBoldItalic.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-Bold.ttf" ), QStringLiteral( "ofl/zillaslab/ZillaSlab-BoldItalic.ttf" ) }, QStringLiteral( "ofl/zillaslab/OFL.txt" ) ),
      GoogleFontDetails( QStringLiteral( "Zilla Slab Highlight" ), { QStringLiteral( "ofl/zillaslabhighlight/ZillaSlabHighlight-Regular.ttf" ), QStringLiteral( "ofl/zillaslabhighlight/ZillaSlabHighlight-Bold.ttf" ) }, QStringLiteral( "ofl/zillaslabhighlight/OFL.txt" ) ),
--  };
-+  }
+   };
 +}
 +
 +QgsFontDownloadDetails QgsFontManager::detailsForFontDownload( const QString &family, QString &matchedFamily ) const
