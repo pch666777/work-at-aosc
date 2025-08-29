@@ -1,0 +1,5 @@
+PKGNAME="pax-utils"
+PKGSEC="devel"
+PKGDES="ELF related utils for ELF 32/64 binaries"
+PKGDEP="glibc libcap pyelftools"
+ABTYPE=meson
