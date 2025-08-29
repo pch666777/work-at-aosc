@@ -20,19 +20,6 @@ Signed-off-by: Mingcong Bai <jeffbai@aosc.io>
  libraries/libldap/tls2.c | 14 +++++++++++++-
  2 files changed, 13 insertions(+), 4 deletions(-)
 
-diff --git a/libraries/libldap/init.c b/libraries/libldap/init.c
---- a/libraries/libldap/init.c
-+++ b/libraries/libldap/init.c
-@@ -508,9 +508,6 @@ ldap_int_destroy_global_options(void)
-		gopts->ldo_def_sasl_authcid = NULL;
-	}
- #endif
--#ifdef HAVE_TLS
--	ldap_int_tls_destroy( gopts );
--#endif
- }
-
- /*
 diff --git a/libraries/libldap/tls2.c b/libraries/libldap/tls2.c
 index 82ca5272cc..e100f1191e 100644
 --- a/libraries/libldap/tls2.c

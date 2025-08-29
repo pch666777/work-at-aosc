@@ -1,0 +1,13 @@
+diff -ur a/libraries/libldap/init.c b/libraries/libldap/init.c
+--- a/libraries/libldap/init.c	2021-06-04 02:40:31.000000000 +0800
++++ b/libraries/libldap/init.c	2025-08-29 12:28:33.248708953 +0800
+@@ -508,9 +508,6 @@
+ 		gopts->ldo_def_sasl_authcid = NULL;
+ 	}
+ #endif
+-#ifdef HAVE_TLS
+-	ldap_int_tls_destroy( gopts );
+-#endif
+ }
+ 
+ /* 
