@@ -1,0 +1,13 @@
+ [Unit]
+Description=mystart_sh
+#如果只需要简单的执行脚本，直接After就可以。
+After=network.target
+[Service]
+Type=forking
+ExecStart=/mnt/start.sh
+#ExecReload=/usr/local/av/av_restart.sh
+#ExecStop=/usr/local/av/av_stop.sh
+#PrivateTmp=true
+[Install]
+WantedBy=multi-user.target
+

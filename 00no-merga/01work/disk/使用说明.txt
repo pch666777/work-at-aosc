@@ -1,0 +1,7 @@
+sudo cp ./myser.service /etc/systemd/system/myser.service
+
+sudo systemctl enable myser.service
+sudo systemctl start myser.service
+=====================================
+sudo systemctl stop myser.service
+sudo systemctl disable myser.service
