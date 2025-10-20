@@ -38,6 +38,7 @@ clear_dir(){
     clear_dir_one "ppc"
     clear_dir_one "loong3"
     clear_dir_one "loong64"
+    clear_dir_one "loong64_nosimd"
 }
 
 link_asoc(){
@@ -47,6 +48,7 @@ link_asoc(){
     relink_dir "ppc" "aosc-TREE"
     relink_dir "loong3" "aosc-TREE"
     relink_dir "loong64" "aosc-TREE"
+    relink_dir "loong64_nosimd" "aosc-TREE"
 }
 
 link_my_asoc(){
@@ -56,6 +58,7 @@ link_my_asoc(){
     relink_dir "ppc" "my-TREE"
     relink_dir "loong3" "my-TREE"
     relink_dir "loong64" "my-TREE"
+    relink_dir "loong64_nosimd" "aosc-TREE"
 }
 
 create_dir(){
@@ -67,6 +70,7 @@ create_dir(){
     mkdir "./loong64"
     mkdir "./ppc"
     mkdir "./rv"
+    mkdir "./loong64_nosimd"
 }
 
 
