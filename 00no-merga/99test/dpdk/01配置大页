@@ -1,0 +1,14 @@
+# 配置大页
+# 辑/etc/default/grub 然后 update-grub
+# 加在 GRUB_CMDLINE_LINUX_DEFAULT=
+# 查看本机是否支持1G大页面：cat /proc/cpuinfo | grep pdpe1gb
+# 返回有 pdpe1gb 字样说明支持，采用下列 grub 启动参数
+transparent_hugepage=never default_hugepagesz=1G hugepagesz=1G hugepages=8
+
+# 如果不支持，通过 `getconf PAGESIZE` 查看本机页面大小，使用
+transparent_hugepage=never hugepages=N
+总大小 = N * pagesize
+
+增加完成后 sudo update-grub
+
+使用 `cat /proc/meminfo | grep Huge`  验证大页
