@@ -1,0 +1,9 @@
+ 
+一、启动ovs服务
+sudo systemctl start ovs-vswitchd
+查看ovs设备情况：sudo ovs-vsctl show
+
+二、启动docker服务
+sudo systemctl start docker
+查看docker网络情况：sudo docker network ls
+查看docker容器： sudo docker ps -a
