@@ -5,20 +5,28 @@ relink_dir(){
         echo "目录不存在：$1"
         return 0
     fi
+    # 处理SRCS
     if test -e "$BASE_DIR/$1/SRCS"; then
         echo "清理：$1/SRCS"
         rm -rf "$BASE_DIR/$1/SRCS"
     fi
-    if test -e "$BASE_DIR/$1/TREE"; then
-        echo "清理 $1/TREE"
-        rm -rf "$BASE_DIR/$1/TREE"
-    fi
-
     ln -s "$BASE_DIR/base/SRCS" "$BASE_DIR/$1/SRCS"
     echo "$BASE_DIR/base/SRCS --> $BASE_DIR/$1/SRCS"
-
-    ln -s "$BASE_DIR/base/$2" "$BASE_DIR/$1/TREE"
-    echo "$BASE_DIR/base/$2 --> $BASE_DIR/$1/TREE"
+    # 处理TREE
+    if test -e "$BASE_DIR/$1/TREE"; then
+        # 如果为非软连接，则不处理
+        if [ -h "$BASE_DIR/$1/TREE" ]; then
+            echo "清理 $1/TREE"
+            rm -rf "$BASE_DIR/$1/TREE"
+            ln -s "$BASE_DIR/base/$2" "$BASE_DIR/$1/TREE"
+            echo "$BASE_DIR/base/$2 --> $BASE_DIR/$1/TREE"
+        else
+            echo "保留 $1/TREE"
+        fi
+    else
+        ln -s "$BASE_DIR/base/$2" "$BASE_DIR/$1/TREE"
+        echo "$BASE_DIR/base/$2 --> $BASE_DIR/$1/TREE"
+    fi
 }
 
 clear_dir_one(){
@@ -42,8 +50,8 @@ clear_dir(){
 }
 
 link_asoc(){
-    relink_dir "rv" "aosc-TREE"
     relink_dir "amd64" "aosc-TREE"
+    relink_dir "rv" "aosc-TREE"
     relink_dir "arm64" "aosc-TREE"
     relink_dir "ppc" "aosc-TREE"
     relink_dir "loong3" "aosc-TREE"
