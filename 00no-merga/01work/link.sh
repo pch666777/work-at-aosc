@@ -1,31 +1,41 @@
 #!/bin/bash
 
+# 必须先设置指定的路径
+AOSC_TREE="/home/pngchs/build/amd64/TREE"
+AOSC_SRCS="/home/pngchs/build/other/SRCS"
+
+# 构架目录
+AOSC_ARCH=("amd64" "arm64" "loong64" "loong64_nosimd" "loong3" "ppc" "rv")
+
 relink_dir(){
+    echo "-----------------------------------------"
     if [ ! -e "$BASE_DIR/$1" ]; then
-        echo "目录不存在：$1"
+        echo "构架不存在：$1"
         return 0
     fi
     # 处理SRCS
     if test -e "$BASE_DIR/$1/SRCS"; then
         echo "清理：$1/SRCS"
-        rm -rf "$BASE_DIR/$1/SRCS"
+        rm -rfv "$BASE_DIR/$1/SRCS"
     fi
-    ln -s "$BASE_DIR/base/SRCS" "$BASE_DIR/$1/SRCS"
-    echo "$BASE_DIR/base/SRCS --> $BASE_DIR/$1/SRCS"
+    ln -s "$AOSC_SRCS" "$BASE_DIR/$1/SRCS"
+    echo "$AOSC_SRCS --> $BASE_DIR/$1/SRCS"
     # 处理TREE
-    if test -e "$BASE_DIR/$1/TREE"; then
-        # 如果为非软连接，则不处理
+    if [ -e "$BASE_DIR/$1/TREE" ]; then
+        # 只要是软连接，则清理
         if [ -h "$BASE_DIR/$1/TREE" ]; then
-            echo "清理 $1/TREE"
             rm -rf "$BASE_DIR/$1/TREE"
-            ln -s "$BASE_DIR/base/$2" "$BASE_DIR/$1/TREE"
-            echo "$BASE_DIR/base/$2 --> $BASE_DIR/$1/TREE"
+            echo "清理: $1/TREE"
         else
             echo "保留 $1/TREE"
         fi
-    else
-        ln -s "$BASE_DIR/base/$2" "$BASE_DIR/$1/TREE"
-        echo "$BASE_DIR/base/$2 --> $BASE_DIR/$1/TREE"
+    fi
+    # TREE 路径不存在则连接
+    if [ ! -e "$BASE_DIR/$1/TREE" ]; then
+        # 还要再清理一次，因为可能遇到指向无效目录的软连接
+        rm -rf "$BASE_DIR/$1/TREE"
+        ln -s "$AOSC_TREE" "$BASE_DIR/$1/TREE"
+        echo "$AOSC_TREE --> $1/TREE"
     fi
 }
 
@@ -49,36 +59,23 @@ clear_dir(){
     clear_dir_one "loong64_nosimd"
 }
 
+# 连接安同的 TREE 目录，以及 SRCS
 link_asoc(){
-    relink_dir "amd64" "aosc-TREE"
-    relink_dir "rv" "aosc-TREE"
-    relink_dir "arm64" "aosc-TREE"
-    relink_dir "ppc" "aosc-TREE"
-    relink_dir "loong3" "aosc-TREE"
-    relink_dir "loong64" "aosc-TREE"
-    relink_dir "loong64_nosimd" "aosc-TREE"
+    for this_arch in "${AOSC_ARCH[@]}"; do
+        relink_dir "$this_arch" "$AOSC_TREE"
+    done
 }
 
 link_my_asoc(){
-    relink_dir "rv" "my-TREE"
-    relink_dir "amd64" "my-TREE"
-    relink_dir "arm64" "my-TREE"
-    relink_dir "ppc" "my-TREE"
-    relink_dir "loong3" "my-TREE"
-    relink_dir "loong64" "my-TREE"
-    relink_dir "loong64_nosimd" "aosc-TREE"
+    echo "不支持的操作！"
 }
 
 create_dir(){
-    mkdir "./base"
-    mkdir "./base/SRCS"
-    mkdir "./amd64"
-    mkdir "./arm64"
-    mkdir "./loong3"
-    mkdir "./loong64"
-    mkdir "./ppc"
-    mkdir "./rv"
-    mkdir "./loong64_nosimd"
+    for this_arch in "${AOSC_ARCH[@]}"; do
+        mkdir "$this_arch"
+    done
+    mkdir "other"
+    mkdir "other/SRCS"
 }
 
 
